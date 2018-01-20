@@ -7,11 +7,11 @@ var RENDER = (function(){
         return domNode;
     };
 
-    var createTableHeadDOM = function(firstRow) {
+    var createTableHeadDOM = function(columns) {
         var tHead = document.createElement("thead");
         var tr = document.createElement("tr");
 
-        Object.keys(firstRow).forEach(function(columnName) {
+        columns.forEach(function(columnName) {
             var th = createTagWithTextNode("th", columnName);
             tr.appendChild(th);
         });
@@ -30,7 +30,7 @@ var RENDER = (function(){
         });
 
         return tr;
-    }
+    };
 
     var createTableBodyDOM = function(rowData) {
         var tBody = document.createElement("tbody");
@@ -45,7 +45,9 @@ var RENDER = (function(){
     var createTableDOM = function(rowData) {
         var tableDOM = document.createElement("table");
 
-        tableDOM.appendChild(createTableHeadDOM(rowData[0]));
+        var columns = Object.keys(rowData[0]);
+
+        tableDOM.appendChild(createTableHeadDOM(columns));
         tableDOM.appendChild(createTableBodyDOM(rowData));
 
         return tableDOM;
