@@ -55,6 +55,12 @@ var RENDER = (function(){
 
     return function(domId, data){
         var domObject = document.getElementById(domId);
+
+        // Remove everything before adding
+        while(domObject.firstChild){
+            domObject.removeChild(domObject.firstChild);
+        }
+
         var header = createTagWithTextNode("h1", data.title);
 
         domObject.appendChild(header);
