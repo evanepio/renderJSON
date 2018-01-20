@@ -12,8 +12,7 @@ var RENDER = (function(){
         var tr = document.createElement("tr");
 
         Object.keys(firstRow).forEach(function(columnName) {
-            var th = document.createElement("th");
-            th.appendChild(document.createTextNode(columnName));
+            var th = createTagWithTextNode("th", columnName);
             tr.appendChild(th);
         });
 
