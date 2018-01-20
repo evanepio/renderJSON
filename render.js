@@ -21,22 +21,22 @@ var RENDER = (function(){
         return tHead;
     };
 
-    var createTableRowDOM = function(row) {
+    var createTableRowDOM = function(columns, row) {
         var tr = document.createElement("tr");
 
-        Object.keys(row).forEach(function(column) {
-            var td = createTagWithTextNode("td", row[column]);
+        columns.forEach(function(columnName) {
+            var td = createTagWithTextNode("td", row[columnName]);
             tr.appendChild(td);
         });
 
         return tr;
     };
 
-    var createTableBodyDOM = function(rowData) {
+    var createTableBodyDOM = function(columns, rowData) {
         var tBody = document.createElement("tbody");
 
         rowData.forEach(function(row) {
-            tBody.appendChild(createTableRowDOM(row));
+            tBody.appendChild(createTableRowDOM(columns, row));
         });
 
         return tBody;
@@ -48,7 +48,7 @@ var RENDER = (function(){
         var columns = Object.keys(rowData[0]);
 
         tableDOM.appendChild(createTableHeadDOM(columns));
-        tableDOM.appendChild(createTableBodyDOM(rowData));
+        tableDOM.appendChild(createTableBodyDOM(columns, rowData));
 
         return tableDOM;
     };
