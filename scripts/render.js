@@ -26,22 +26,13 @@ var RENDER = (function(){
         return tHead;
     };
 
-    var createTableRowDOM = function(columns, row) {
-        var tr = document.createElement("tr");
-
-        columns.forEach(function(columnName) {
-            var td = createDOMNodeWithTextNode("td", row[columnName]);
-            tr.appendChild(td);
-        });
-
-        return tr;
-    };
-
     var createTableBodyDOM = function(columns, rowData) {
         var tBody = document.createElement("tbody");
 
         rowData.forEach(function(row) {
-            tBody.appendChild(createTableRowDOM(columns, row));
+            tBody.appendChild(createParentDOMWithChildren("tr", "td", columns.map(function(columnName){
+                return row[columnName];
+            })));
         });
 
         return tBody;
