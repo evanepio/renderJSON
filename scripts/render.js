@@ -7,14 +7,19 @@ var RENDER = (function(){
         return domNode;
     };
 
+    var createParentDOMWithChildren = function(parentName, childName, childContents) {
+        var parent = document.createElement(parentName);
+
+        childContents.forEach(function(contents) {
+            parent.appendChild(createDOMNodeWithTextNode(childName, contents));
+        });
+
+        return parent;
+    };
+
     var createTableHeadDOM = function(columns) {
         var tHead = document.createElement("thead");
-        var tr = document.createElement("tr");
-
-        columns.forEach(function(columnName) {
-            var th = createDOMNodeWithTextNode("th", columnName);
-            tr.appendChild(th);
-        });
+        var tr = createParentDOMWithChildren("tr", "th", columns);
 
         tHead.appendChild(tr);
 
