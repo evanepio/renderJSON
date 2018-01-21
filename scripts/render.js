@@ -1,7 +1,7 @@
 var RENDER = (function(){
     "use strict";
 
-    var createTagWithTextNode = function(tagName, text) {
+    var createDOMNodeWithTextNode = function(tagName, text) {
         var domNode = document.createElement(tagName);
         domNode.appendChild(document.createTextNode(text));
         return domNode;
@@ -12,7 +12,7 @@ var RENDER = (function(){
         var tr = document.createElement("tr");
 
         columns.forEach(function(columnName) {
-            var th = createTagWithTextNode("th", columnName);
+            var th = createDOMNodeWithTextNode("th", columnName);
             tr.appendChild(th);
         });
 
@@ -25,7 +25,7 @@ var RENDER = (function(){
         var tr = document.createElement("tr");
 
         columns.forEach(function(columnName) {
-            var td = createTagWithTextNode("td", row[columnName]);
+            var td = createDOMNodeWithTextNode("td", row[columnName]);
             tr.appendChild(td);
         });
 
@@ -61,7 +61,7 @@ var RENDER = (function(){
             domObject.removeChild(domObject.firstChild);
         }
 
-        var header = createTagWithTextNode("h1", data.title);
+        var header = createDOMNodeWithTextNode("h1", data.title);
 
         domObject.appendChild(header);
         domObject.appendChild(createTableDOM(data.rows));
