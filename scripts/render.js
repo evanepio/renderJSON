@@ -49,14 +49,7 @@ var RENDER = (function(){
         return tableDOM;
     };
 
-    return function(domId, data){
-        var domObject = document.getElementById(domId);
-
-        // Remove everything before adding
-        while(domObject.firstChild){
-            domObject.removeChild(domObject.firstChild);
-        }
-
+    return function(domObject, data){
         var header = createDOMNodeWithTextNode("h1", data.title);
 
         domObject.appendChild(header);
@@ -66,5 +59,19 @@ var RENDER = (function(){
 
 document.getElementById("renderButton").onclick = function(event) {
     var jsonData = JSON.parse(document.getElementById("jsonField").value);
-    RENDER("replaceMe", jsonData);
+    var domObject = document.getElementById("replaceMe");
+
+    // Remove everything before adding
+    while(domObject.firstChild){
+        domObject.removeChild(domObject.firstChild);
+    }
+
+
+    if (Array.isArray(jsonData)) {
+        jsonData.forEach(function(jsonChunk){
+            RENDER(domObject, jsonChunk);
+        })
+    } else {
+        RENDER(domObject, jsonData);
+    }
 };
