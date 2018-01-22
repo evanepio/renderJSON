@@ -11,7 +11,7 @@ var RENDER = (function(){
         var parent = document.createElement(parentName);
 
         childContents.forEach(function(contents) {
-            parent.appendChild(createDOMNodeWithTextNode(childName, contents));
+            parent.appendChild(createDOMNodeWithTextNode(childName, contents ? contents : ""));
         });
 
         return parent;
